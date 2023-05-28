@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -91,12 +92,14 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <TextField layoutX="14.0" layoutY="42.0" prefHeight="25.0" prefWidth="206.0" promptText="Titulo da tarefa">
+            <TextField layoutX="16.0" layoutY="33.0" prefHeight="25.0" prefWidth="206.0" promptText="Titulo da tarefa:">
                <font>
-                  <Font name="Arial Italic" size="12.0" />
+                  <Font name="Arial" size="12.0" />
                </font>
             </TextField>
-            <TextArea layoutX="17.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextArea layoutX="15.0" layoutY="155.0" prefHeight="200.0" prefWidth="607.0" promptText="Descricao da tarefa:" />
+            <DatePicker layoutX="16.0" layoutY="77.0" prefHeight="25.0" prefWidth="206.0" promptText="Data de inicio:" />
+            <DatePicker layoutX="16.0" layoutY="116.0" prefHeight="25.0" prefWidth="206.0" promptText="Data de termino:" />
       </children>
     </AnchorPane>
   </children>
