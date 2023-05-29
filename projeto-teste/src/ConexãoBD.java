@@ -8,13 +8,11 @@ public class ConexãoBD {
     private String usuario;
     private String senha;
     private Connection con;
-    private Label status;
 
-    public ConexãoBD(Label status) {
+    public ConexãoBD() {
         this.url = "jdbc:postgresql://localhost:5432/Post-It";
         usuario = "postgres";
         senha = "1234";
-        this.status = status;
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -22,11 +20,10 @@ public class ConexãoBD {
             System.out.println("Conexão Realizada com sucesso");
         } catch (Exception e) {
             System.out.println("Problema na conexão com banco de dados!");
-            //status.setText("Problema na conexão com banco de dados");
         }
     }
 
-    private int executaSQL(String sql) {
+    private int executaSQL(String sql, Label status) {
         try {
             Statement stm = con.createStatement();
             int res = stm.executeUpdate(sql);
@@ -34,21 +31,22 @@ public class ConexãoBD {
             return res;
         } catch (Exception e) {
             System.out.println(e);
-            //status.setText("Problema na conexão com banco de dados");
+            status.setText("Ocorreu um erro ao inserir os dados!");
             return 0;
         }
     }
 
-    public void inserirAtividadeBD(Atividade atividade) {
-        String sql = "INSERT INTO atividades (titulo, descricao, data_inicio, data_fim)" + " values ('"
-                + atividade.getTitulo() + "','" + atividade.getDescricao() + "','"+atividade.getDataInicio()+"','"+atividade.getDataFim()+"');";
+    public void inserirAtividadeBD(Atividade atividade, Label status) {
+        String sql = "INSERT INTO atividade (titulo, descricao, data_inicio, data_fim)" + " values ('"
+                + atividade.getTitulo() + "','" + atividade.getDescricao() + "','" + atividade.getDataInicio() + "','"
+                + atividade.getDataFim() + "');";
 
-                System.out.println(sql);
-                int res = executaSQL(sql);
-                if(res>0){
-                    System.out.println("Atividade inserida com sucesso!");
-                    //status.setText(Atividade inserida com sucesso!);
-                }
+        System.out.println(sql);
+        int res = executaSQL(sql, status);
+        if (res > 0) {
+            System.out.println("Atividade inserida com sucesso!");
+            status.setText("Atividade inserida com sucesso!");
+        }
     }
 
 }

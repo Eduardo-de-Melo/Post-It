@@ -30,20 +30,23 @@ public class PostItController {
     private TextField titulo_tarefa;
 
     private ConexãoBD con;
+    private validarDados vDados;
 
-    
     public PostItController() {
-        this.con = new ConexãoBD(status);
+        this.con = new ConexãoBD();
+        this.vDados = new validarDados();
     }
 
     @FXML
     void enviarAtividade(ActionEvent event) {
-        //validarDados.verificarCampos(titulo_tarefa.getText(0, 250), data_inicio.getValue(), data_fim.getValue(), descricao.getText(0, 5000));
 
-        Atividade atividade = new Atividade(titulo_tarefa.getText(), data_inicio.getValue(), data_fim.getValue(),
-                descricao.getText());
+        if (vDados.dadosValidos(titulo_tarefa.getText(), data_inicio.getValue(), data_fim.getValue(),
+                descricao.getText(), status)) {
+            Atividade atividade = new Atividade(titulo_tarefa.getText(), data_inicio.getValue(), data_fim.getValue(),
+                    descricao.getText());
+            con.inserirAtividadeBD(atividade, status);
+        }
 
-        con.inserirAtividadeBD(atividade);
     }
 
     @FXML
@@ -58,7 +61,5 @@ public class PostItController {
     public void setStatus(String atualStatus) {
         status.setText(atualStatus);
     }
-
-    
 
 }
